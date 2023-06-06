@@ -82,12 +82,24 @@ resource "yandex_dataproc_cluster" "foo" {
   }
 }
 
-resource "yandex_vpc_network" "foo" {}
+resource "yandex_vpc_network" "dataproc-net" {}
 
-resource "yandex_vpc_subnet" "foo" {
-  zone           = "ru-central1-a"
-  network_id     = yandex_vpc_network.foo.id
-  v4_cidr_blocks = ["10.1.0.0/24"]
+resource "yandex_vpc_gateway" "dataproc-gateway" {}
+
+resource "yandex_vpc_route_table" "dataproc-route-table" {
+  network_id = yandex_vpc_network.dataproc-net.id
+  static_route { 
+    destination_prefix= "0.0.0.0/0"
+    gateway_id=yandex_vpc_network.dataproc-gateway
+  }
+}
+
+
+resource "yandex_vpc_subnet" "dataproc-control-subnet" {
+  zone             = "ru-central1-a"
+  network_id       = yandex_vpc_network.dataproc-net.id
+  route_table_name = dataproc-route-table
+  v4_cidr_blocks   = ["10.1.0.0/24"]
 }
 
 resource "yandex_iam_service_account" "dataproc" {
