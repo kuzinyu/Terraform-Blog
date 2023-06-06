@@ -32,7 +32,7 @@ resource "yandex_dataproc_cluster" "foo" {
         disk_type_id       = "network-hdd"
         disk_size          = 20
       }
-      subnet_id   = yandex_vpc_subnet.foo.id
+      subnet_id   = yandex_vpc_subnet.dataproc-control-subnet.id
       hosts_count = 1
     }
 
@@ -44,7 +44,7 @@ resource "yandex_dataproc_cluster" "foo" {
         disk_type_id       = "network-hdd"
         disk_size          = 20
       }
-      subnet_id   = yandex_vpc_subnet.foo.id
+      subnet_id   = yandex_vpc_subnet.dataproc-control-subnet.id
       hosts_count = 2
     }
 
@@ -56,7 +56,7 @@ resource "yandex_dataproc_cluster" "foo" {
         disk_type_id       = "network-hdd"
         disk_size          = 20
       }
-      subnet_id   = yandex_vpc_subnet.foo.id
+      subnet_id   = yandex_vpc_subnet.dataproc-control-subnet.id
       hosts_count = 2
     }
 
@@ -68,7 +68,7 @@ resource "yandex_dataproc_cluster" "foo" {
         disk_type_id       = "network-hdd"
         disk_size          = 20
       }
-      subnet_id   = yandex_vpc_subnet.foo.id
+      subnet_id   = yandex_vpc_subnet.dataproc-control-subnet.id
       hosts_count = 2      
       autoscaling_config {
         max_hosts_count = 10
@@ -90,7 +90,7 @@ resource "yandex_vpc_route_table" "dataproc-route-table" {
   network_id = yandex_vpc_network.dataproc-net.id
   static_route { 
     destination_prefix= "0.0.0.0/0"
-    gateway_id=yandex_vpc_network.dataproc-gateway
+    gateway_id=yandex_vpc_gateway.dataproc-gateway.id
   }
 }
 
@@ -98,7 +98,6 @@ resource "yandex_vpc_route_table" "dataproc-route-table" {
 resource "yandex_vpc_subnet" "dataproc-control-subnet" {
   zone             = "ru-central1-a"
   network_id       = yandex_vpc_network.dataproc-net.id
-  route_table_name = dataproc-route-table
   v4_cidr_blocks   = ["10.1.0.0/24"]
 }
 
