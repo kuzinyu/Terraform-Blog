@@ -11,8 +11,8 @@ pipeline {
         
         stage ("terraform init") {
             steps {
-                sh ('/opt/homebrew/bin/terraform providers lock -net-mirror=https://terraform-mirror.yandexcloud.net -platform=linux_amd64 -platform=darwin_arm64 yandex-cloud/yandex')
-                sh ('/opt/homebrew/bin/terraform init') 
+                sh ('terraform providers lock -net-mirror=https://terraform-mirror.yandexcloud.net -platform=linux_amd64 -platform=darwin_arm64 yandex-cloud/yandex')
+                sh ('terraform init') 
             }
         }
         
@@ -21,7 +21,7 @@ pipeline {
                 echo "Terraform plan"
                 sh ('''
                      set | grep TF_VAR
-                     /opt/homebrew/bin/terraform plan -no-color -out plan
+                     terraform plan -no-color -out plan
                      
                      #cat plan
                   '''
@@ -34,7 +34,7 @@ pipeline {
                 echo "Terraform apply"
                 sh ('''
                      set | grep TF_VAR
-                     /opt/homebrew/bin/terraform apply -input=false -auto-approve -no-color "plan" 
+                     terraform apply -input=false -auto-approve -no-color "plan" 
                      
                      #cat plan
                   '''
