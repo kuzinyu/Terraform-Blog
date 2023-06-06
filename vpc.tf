@@ -1,3 +1,6 @@
+## https://registry.terraform.io/providers/yandex-cloud/yandex/latest/docs/data-sources/datasource_dataproc_cluster
+## https://registry.terraform.io/providers/yandex-cloud/yandex/latest/docs/resources/dataproc_cluster
+
 resource "yandex_dataproc_cluster" "foo" {
   depends_on = [yandex_resourcemanager_folder_iam_binding.dataproc]
 
