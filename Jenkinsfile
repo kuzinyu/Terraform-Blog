@@ -34,7 +34,7 @@ pipeline {
                 echo "Terraform apply"
                 sh ('''
                      set | grep TF_VAR
-                     /opt/homebrew/bin/terraform apply -input=false -auto-approve  "plan"
+                     /opt/homebrew/bin/terraform apply -input=false -auto-approve -no-color "plan" 
                      
                      #cat plan
                   '''
