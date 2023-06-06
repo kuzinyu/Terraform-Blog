@@ -91,7 +91,7 @@ resource "yandex_vpc_subnet" "foo" {
 }
 
 resource "yandex_iam_service_account" "dataproc" {
-  name        = "dataproc_svc_acc"
+  name        = "dataproc-svc-acc"
   description = "service account to manage Dataproc Cluster"
 }
 
