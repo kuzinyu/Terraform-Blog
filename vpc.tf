@@ -106,6 +106,7 @@ resource "yandex_vpc_subnet" "dataproc-control-subnet" {
   zone             = "ru-central1-a"
   network_id       = yandex_vpc_network.dataproc-net.id
   v4_cidr_blocks   = ["10.1.0.0/24"]
+  route_table_id = yandex_vpc_route_table.dataproc-route-table.id
 }
 
 resource "yandex_iam_service_account" "dataproc" {
