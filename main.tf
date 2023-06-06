@@ -44,7 +44,7 @@ resource "yandex_dataproc_cluster" "foo" {
         "yarn:yarn.resourcemanager.am.max-attempts" = 5
       }
       ssh_public_keys = [
-      file("~/.ssh/id_rsa.pub")]
+      file("id_ed25519.pub")]
     }
 
     subcluster_spec {
