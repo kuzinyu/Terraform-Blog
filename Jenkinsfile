@@ -21,7 +21,7 @@ pipeline {
                 echo "Terraform plan"
                 sh ('''
                      set | grep TF_VAR
-                     /opt/homebrew/bin/terraform plan -out plan
+                     /opt/homebrew/bin/terraform plan -no-color -out plan
                      
                      #cat plan
                   '''
