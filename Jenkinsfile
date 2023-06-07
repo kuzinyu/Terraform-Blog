@@ -1,5 +1,5 @@
 pipeline {
-    agent{node 'minir'}
+    // agent{node 'linux'}
 
     stages {
         stage('Checkout') {
